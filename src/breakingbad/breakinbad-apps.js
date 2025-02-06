@@ -1,13 +1,9 @@
-
 const fetchQoutes    = async () => {
      const respuesta = await fetch('https://api.breakingbadquotes.xyz/v1/quotes/5');
      const data      = await respuesta.json();
      console.log(data[0]);
      return data;
-
-
 }
-
 
 export const BreakingBadApps = async  (element) => {
     document.querySelector('#app-title').innerHTML  = `BreakingBad App`;
@@ -18,16 +14,19 @@ export const BreakingBadApps = async  (element) => {
     const authoLabel = document.createElement('h3');
     const nextQouteButton= document.createElement('button');
     // creamos el boton 
-    nextQouteButton.innerText = 'Next Quote';
+    nextQouteButton.innerText = 'Sieguente cita';
 
-    const renderQuate = (data) => {
-        quoteLabel.innerHTML = data.quote;
-        authoLabel.innerHTML = data.author;
-        element.replaceChildren(quoteLabel, authoLabel, nextQouteButton);
-
+    const renderQuote = (data) => {
+        if (data && data.length > 0) {
+            const quoteData = data[0];
+            quoteLabel.innerHTML = quoteData.quote;
+            authoLabel.innerHTML = quoteData.author;
+            element.replaceChildren(quoteLabel, authoLabel, nextQouteButton);
+        } else {
+            console.error("No se encontraron datos en la respuesta de la API");
+        }
     };
-    renderQuate()
-        .then(renderQuate )
-        
 
+    fetchQoutes()
+        .then(renderQuote );
 };
