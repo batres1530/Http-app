@@ -2,8 +2,7 @@
 
 
 export const BreakingBadApps =  (element) => {
-
-    console.log ("Hola Mundo");
-    console.log (element);
+    document.querySelector('#app-title').innerHTML  = `BreakingBad App`;
+    element.innerHTML = ` Cargando...`;
 
 };
