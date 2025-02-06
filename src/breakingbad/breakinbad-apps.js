@@ -26,7 +26,15 @@ export const BreakingBadApps = async  (element) => {
             console.error("No se encontraron datos en la respuesta de la API");
         }
     };
-
+    // añadir listeners
+    nextQouteButton.addEventListener('click',  async() => {
+        element.innerHTML = ` Cargando...`;
+        const quote = await fetchQoutes(); 
+        renderQuote(quote);
+        
+    });
     fetchQoutes()
-        .then(renderQuote );
+    .then(renderQuote)
+    
+
 };
